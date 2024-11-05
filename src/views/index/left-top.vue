@@ -6,10 +6,10 @@ import {ElMessage} from "element-plus"
 
 const duration = ref(2);
 const state = reactive({
-  alarmNum: 0,
-  offlineNum: 0,
-  onlineNum: 0,
-  totalNum: 0,
+  stationNum: 0,
+  recordeddaysNum: 0,
+  recordedmessageNum: 0,
+  errormessageNum: 0,
 });
 
 
@@ -17,10 +17,10 @@ const getData = () => {
   countDeviceNum().then((res) => {
     console.log("左上--设备总览",res);
     if (res.success) {
-      state.alarmNum = res.data.alarmNum;
-      state.offlineNum = res.data.offlineNum;
-      state.onlineNum = res.data.onlineNum;
-      state.totalNum = res.data.totalNum;
+      state.stationNum = res.data.stationNum;
+      state.recordeddaysNum = res.data.recordeddaysNum;
+      state.recordedmessageNum = res.data.recordedmessageNum;
+      state.errormessageNum = res.data.errormessageNum;
     }else{
       ElMessage.error(res.msg)
     }
@@ -32,30 +32,35 @@ getData();
 </script>
 
 <template>
+  <!-- 此处将四处请求得到的信息改为写死的 -->
   <ul class="user_Overview flex">
     <li class="user_Overview-item" style="color: #00fdfa">
       <div class="user_Overview_nums allnum">
-        <CountUp :endVal="state.totalNum" :duration="duration" />
+        <CountUp :endVal="state.stationNum" :duration="duration" />
+        <!-- <CountUp :endVal="500" :duration="duration" /> -->
       </div>
-      <p>总设备数</p>
+      <p>监测站数量</p>
     </li>
     <li class="user_Overview-item" style="color: #07f7a8">
       <div class="user_Overview_nums online">
-        <CountUp :endVal="state.onlineNum" :duration="duration" />
+        <CountUp :endVal="state.recordeddaysNum" :duration="duration" />
+        <!-- <CountUp :endVal="500" :duration="duration" /> -->
       </div>
-      <p>在线数</p>
+      <p>记录天数</p>
     </li>
     <li class="user_Overview-item" style="color: #e3b337">
       <div class="user_Overview_nums offline">
-        <CountUp :endVal="state.offlineNum" :duration="duration" />
+        <CountUp :endVal="state.recordedmessageNum" :duration="duration" />
+        <!-- <CountUp :endVal="500" :duration="duration" /> -->
       </div>
-      <p>掉线数</p>
+      <p>记录信息数</p>
     </li>
     <li class="user_Overview-item" style="color: #f5023d">
       <div class="user_Overview_nums laramnum">
-        <CountUp :endVal="state.alarmNum" :duration="duration" />
+        <CountUp :endVal="state.errormessageNum" :duration="duration" />
+        <!-- <CountUp :endVal="500" :duration="duration" /> -->
       </div>
-      <p>告警次数</p>
+      <p>异常信息数</p>
     </li>
   </ul>
 </template>

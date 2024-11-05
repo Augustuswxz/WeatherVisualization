@@ -48,12 +48,13 @@ export default [
             const a = Mock.mock({
                 success: true,
                 data: {
-                    alarmNum: '@integer(100, 1000)',
-                    offlineNum: '@integer(0, 50)',
-                    totalNum: 698
+                    stationNum: '@integer(10, 1000)',
+                    recordeddaysNum: '@integer(365, 730)',
+                    recordedmessageNum: '@integer(500, 1000)',
+                    errormessageNum: '@integer(0, 50)'
                 }
             })
-            a.data.onlineNum = a.data.totalNum - a.data.offlineNum
+            // a.data.onlineNum = a.data.totalNum - a.data.offlineNum
             return a
         }
     },
@@ -107,7 +108,7 @@ export default [
         url: "/bigscreen/ranking",
         type: "get",
         response: () => {
-            let num = Mock.mock({ "list|80": [{ value: "@integer(50,1000)", name: "@city()" }] }).list
+            let num = Mock.mock({ "list|80": [{ value: "@integer(0,30)", name: "@city()" }] }).list
             //   console.log("ranking",num);
             let newNum: any = [], numObj: any = {}
             num.map((item: any) => {

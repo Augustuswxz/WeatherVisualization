@@ -9,9 +9,24 @@ import RightTop from "./right-top.vue";
 import RightCenter from "./right-center.vue";
 import RightBottom from "./right-bottom.vue";
 import Map from "./Map.vue";
+import { ref } from "vue";
+import ToolBar from "./ToolBar.vue";
+import WeatherInfoCard from "./WeatherInfoCard.vue";
+import ServerStatus from "./ServerStatus.vue";
+
+interface PointProps {
+  lat: number;
+  lng: number;
+}
+const selectedPoint = ref<PointProps>();
+const selectedDate = ref<string>();
 
 const updateSelectedPoint = (val: PointProps) => {
-  // selectedPoint.value = val;
+  selectedPoint.value = val;
+};
+
+const updateSelectedDate = (val: string) => {
+  selectedDate.value = val;
 };
 </script>
 
@@ -25,7 +40,11 @@ const updateSelectedPoint = (val: PointProps) => {
       <ItemWrap class="contetn_left-top contetn_lr-item" title="设备总览">
         <LeftTop />
       </ItemWrap>
-      <ItemWrap class="contetn_left-center contetn_lr-item" title="用户总览">
+      <ItemWrap
+        class="contetn_left-bottom contetn_lr-item"
+        title="降雨量排名(TOP8)"
+        style="padding: 0 10px 16px 10px"
+      >
         <LeftCenter />
       </ItemWrap>
       <ItemWrap
@@ -38,22 +57,25 @@ const updateSelectedPoint = (val: PointProps) => {
     </div>
     <div class="contetn_center">
       <!-- <CenterMap class="contetn_center_top" title="监测站分布图" /> -->
+      <ToolBar @update="updateSelectedDate" />
       <Map @update="updateSelectedPoint" />
-      <ItemWrap class="contetn_center-bottom" title="安装计划">
-        <CenterBottom />
+      <WeatherInfoCard
+        :date="selectedDate || undefined"
+        :pointData="selectedPoint || undefined"
+      ></WeatherInfoCard>
+      <ItemWrap class="contetn_center-bottom" title="服务器状态">
+        <!-- <CenterBottom /> -->
+        <ServerStatus />
       </ItemWrap>
     </div>
     <div class="contetn_right">
       <ItemWrap class="contetn_left-bottom contetn_lr-item" title="报警次数">
         <RightTop />
       </ItemWrap>
-      <ItemWrap
-        class="contetn_left-bottom contetn_lr-item"
-        title="报警排名(TOP8)"
-        style="padding: 0 10px 16px 10px"
-      >
+      <ItemWrap class="contetn_left-center contetn_lr-item" title="用户总览">
         <RightCenter />
       </ItemWrap>
+
       <ItemWrap class="contetn_left-bottom contetn_lr-item" title="数据统计图 ">
         <RightBottom />
       </ItemWrap>

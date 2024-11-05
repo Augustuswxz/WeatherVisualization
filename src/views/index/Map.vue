@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import { ref, onMounted, defineEmits, watch } from "vue";
 import { Scene, PointLayer } from "@antv/l7";
-import { GaodeMap, Mapbox } from "@antv/l7-maps";
+import { GaodeMap } from "@antv/l7-maps";
 import points_data from "@/assets/points_data.json";
-// import WeatherInfoCard from "@/components/WeatherInfoCard.vue";
+import WeatherInfoCard from "@/src/views/index/Map.vue";
 import BorderBox13 from "@/components/datav/border-box-13";
 
 const emit = defineEmits(["update"]);
@@ -17,11 +17,11 @@ const initMap = () => {
   const scene = new Scene({
     id: "map",
     map: new GaodeMap({
-      style: "dark",
+      mapStyle: 'amap://styles/darkblue',
       center: [107.054293, 35.246265],
       zoom: 4.056,
-      // token: "36e7fbf6b069ab4834feb88a40bc562a",
-      token: "4b8d96b56bed29b2df4a7713e3e1421e",
+      token: "36e7fbf6b069ab4834feb88a40bc562a",
+      // token: "4b8d96b56bed29b2df4a7713e3e1421e",
       doubleClickZoom: false,
     }),
   });
@@ -35,7 +35,7 @@ const initMap = () => {
       },
     })
     .shape("circle")
-    .size(8)
+    .size(5)
     .active(true)
     .color("red")
     .style({
