@@ -1,6 +1,7 @@
 import Mock from "mockjs";
 //处理路径传参
 import { parameteUrl } from "@/utils/query-param"
+import { cpuUsage } from "process";
 
 function ArrSet(Arr: any[], id: string): any[] {
     let obj: any = {}
@@ -219,6 +220,61 @@ export default [
                 return a
             }
         }
-    }
+    },
+    //CPU状态
+    {
+			url: "/bigscreen/CPUStatus",
+			type:"get",
+			response: () => {
+				const a = Mock.mock({
+					success: true,
+					data: {
+						CPUUsage: '@integer(10, 90)'
+					}
+				})
+				return a;
+			}
+    },
+		//气象信息
+		{
+			url: "/bigscreen/WeatherInfo",
+			type: "get",
+			response: () => {
+				const a = Mock.mock({
+					success: true,
+					data: {
+						WeatherStationCode : '@integer(1001099999, 1001199999)',
+						Date : '2022/1/1',
+						Latitude : '@integer(0, 90)',
+						Longtitude : '@integer(0, 90)',
+						HeightOfMeteorologicalStation : '@integer(0, 8848)',
+						NameOfMeteorologicalStation : "JAN MAYEN NOR NAVY, NO",
+						AverageTemperature : '@integer(0, 100)',
+						AttributesOfAverageTemperature : 19,
+						AverageDewPoint : '@integer(0, 5)',
+						AttributesOfAverageDewPoint : 19,
+						AverageSeaLevelPressure : '@integer(1010, 1012)',
+						AttributesOfAverageSeaLevelPressure : 19,
+						AverageObservatoryPressure : '@integer(0, 10)',
+						AttributesOfAverageObservatoryPressure : 19,
+						AverageVisibility : '@integer(0, 1000)',
+						AttributesOfAverageVisibility : 4,
+						AverageWindSpeed : '@integer(0, 80)',
+						AttributesOfAverageWindSpeed : 19,
+						MaximumSustainedWindSpeed : '@integer(20, 90)',
+						AttributesOfMaximumSustainedWindSpeed : 35.5,
+						HighestTemperature : '@integer(20, 50)',
+						AttributesOfHighestTemperature : null,
+						LowestTemperature : '@integer(0, 20)',
+						AttributesOfLowestTemperature : null,
+						Precipitation : '@integer(0, 90)',
+						AttributesOfPrecipitation : "E",
+						DepthOfSnow : '@integer(0, 90)',
+						Indicator : 1000,
+					}
+				})
+				return a;
+			}
+		}
 ];
 

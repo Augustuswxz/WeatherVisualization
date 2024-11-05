@@ -2,6 +2,8 @@
 import { ElMessage } from "element-plus";
 import { column } from "element-plus/es/components/table-v2/src/common";
 import { defineProps, watch, ref } from "vue";
+import { WeatherInfo } from "@/api";
+import { tr } from "element-plus/es/locale";
 
 interface WeatherInfoProps {
   pointData:
@@ -14,103 +16,117 @@ interface WeatherInfoProps {
 }
 const props = defineProps<WeatherInfoProps>();
 const DialogShow = ref(false);
-const Record = ref<{
-  WeatherStationCode : number;
-  Date : string;
-  Latitude : number;
-  Longtitude : number;
-  HeightOfMeteorologicalStation : number;
-  NameOfMeteorologicalStation : string;
-  AverageTemperature : number;
-  AttributesOfAverageTemperature : number;
-  AverageDewPoint : number;
-  AttributesOfAverageDewPoint : number;
-  AverageSeaLevelPressure : number;
-  AttributesOfAverageSeaLevelPressure : number;
-  AverageObservatoryPressure : number;
-  AttributesOfAverageObservatoryPressure : number;
-  AverageVisibility : number;
-  AttributesOfAverageVisibility : number;
-  AverageWindSpeed : number;
-  AttributesOfAverageWindSpeed : number;
-  MaximumSustainedWindSpeed : number;
-  AttributesOfMaximumSustainedWindSpeed : number;
-  HighestTemperature : number;
-  AttributesOfHighestTemperature : number;
-  LowestTemperature : number;
-  AttributesOfLowestTemperature : number;
-  Precipitation : number;
-  AttributesOfPrecipitation : string;
-  DepthOfSnow : number;
-  Indicator : number;
-}| undefined>(undefined);
+// const Record = ref<{
+//   WeatherStationCode : number;
+//   Date : string;
+//   Latitude : number;
+//   Longtitude : number;
+//   HeightOfMeteorologicalStation : number;
+//   NameOfMeteorologicalStation : string;
+//   AverageTemperature : number;
+//   AttributesOfAverageTemperature : number;
+//   AverageDewPoint : number;
+//   AttributesOfAverageDewPoint : number;
+//   AverageSeaLevelPressure : number;
+//   AttributesOfAverageSeaLevelPressure : number;
+//   AverageObservatoryPressure : number;
+//   AttributesOfAverageObservatoryPressure : number;
+//   AverageVisibility : number;
+//   AttributesOfAverageVisibility : number;
+//   AverageWindSpeed : number;
+//   AttributesOfAverageWindSpeed : number;
+//   MaximumSustainedWindSpeed : number;
+//   AttributesOfMaximumSustainedWindSpeed : number;
+//   HighestTemperature : number;
+//   AttributesOfHighestTemperature : number;
+//   LowestTemperature : number;
+//   AttributesOfLowestTemperature : number;
+//   Precipitation : number;
+//   AttributesOfPrecipitation : string;
+//   DepthOfSnow : number;
+//   Indicator : number;
+// }| undefined>(undefined);
 
-Record.value = {
-  WeatherStationCode : 1001099999,
-  Date : "2022/1/1",
-  Latitude : 70.9333333,
-  Longtitude : -8.6666667,
-  HeightOfMeteorologicalStation : 9,
-  NameOfMeteorologicalStation : "JAN MAYEN NOR NAVY, NO",
-  AverageTemperature : 12.1,
-  AttributesOfAverageTemperature : 19,
-  AverageDewPoint : 3.8,
-  AttributesOfAverageDewPoint : 19,
-  AverageSeaLevelPressure : 1010.2,
-  AttributesOfAverageSeaLevelPressure : 19,
-  AverageObservatoryPressure : 9,
-  AttributesOfAverageObservatoryPressure : 19,
-  AverageVisibility : 9.9,
-  AttributesOfAverageVisibility : 4,
-  AverageWindSpeed : 16.6,
-  AttributesOfAverageWindSpeed : 19,
-  MaximumSustainedWindSpeed : 27,
-  AttributesOfMaximumSustainedWindSpeed : 35.5,
-  HighestTemperature : 18,
-  AttributesOfHighestTemperature : null,
-  LowestTemperature : 9,
-  AttributesOfLowestTemperature : null,
-  Precipitation : 0.01,
-  AttributesOfPrecipitation : "E",
-  DepthOfSnow : 999.9,
-  Indicator : 1000,
-};
+// Record.value = {
+//   WeatherStationCode : 1001099999,
+//   Date : "2022/1/1",
+//   Latitude : 70.9333333,
+//   Longtitude : -8.6666667,
+//   HeightOfMeteorologicalStation : 9,
+//   NameOfMeteorologicalStation : "JAN MAYEN NOR NAVY, NO",
+//   AverageTemperature : 12.1,
+//   AttributesOfAverageTemperature : 19,
+//   AverageDewPoint : 3.8,
+//   AttributesOfAverageDewPoint : 19,
+//   AverageSeaLevelPressure : 1010.2,
+//   AttributesOfAverageSeaLevelPressure : 19,
+//   AverageObservatoryPressure : 9,
+//   AttributesOfAverageObservatoryPressure : 19,
+//   AverageVisibility : 9.9,
+//   AttributesOfAverageVisibility : 4,
+//   AverageWindSpeed : 16.6,
+//   AttributesOfAverageWindSpeed : 19,
+//   MaximumSustainedWindSpeed : 27,
+//   AttributesOfMaximumSustainedWindSpeed : 35.5,
+//   HighestTemperature : 18,
+//   AttributesOfHighestTemperature : null,
+//   LowestTemperature : 9,
+//   AttributesOfLowestTemperature : null,
+//   Precipitation : 0.01,
+//   AttributesOfPrecipitation : "E",
+//   DepthOfSnow : 999.9,
+//   Indicator : 1000,
+// };
 
-watch(
-  () => props.pointData,
-  (newVal) => {
-    if (newVal) {
-      // 当 pointData 有值时，显示弹窗
-      DialogShow.value = true;
-      console.log("用户点击散点",newVal);
-    }
-  }
-);
-
-// const Record = ref<{ [key: string]: any } | null>(null);
 // watch(
-//   () => [props.pointData, props.date],
-//   async (newval) => {
-//     const [pointData, date] = newval;
-//     if(pointData & date){
-//       try {
-//         const response = await axios.get("url",{
-//           params: {
-//             lat : pointData.lat,
-//             lng : pointData.lng,
-//             date : date,
-//           }
-//         });
-//         Record.value = response.data;
-//         DialogShow.value = true;
-//       } catch(error) {
-//         ElMessage.error("获取气象记录失败，请稍后。");
-//         DialogShow.value = false;
-//       }
+//   () => props.pointData,
+//   (newVal) => {
+//     if (newVal) {
+//       // 当 pointData 有值时，显示弹窗
+//       DialogShow.value = true;
+//       console.log("用户点击散点",newVal);
 //     }
-//   },
-//   {immediate: true}
+//   }
 // );
+
+const Record = ref<{ [key: string]: any } | null>(null);
+watch(
+  () => [props.pointData, props.date],
+  async (newval) => {
+    const [pointData, date] = newval;
+    if(pointData){
+      // try {
+      //   const response = await axios.get("url",{
+      //     params: {
+      //       lat : pointData.lat,
+      //       lng : pointData.lng,
+      //       date : date,
+      //     }
+      //   });
+      //   Record.value = response.data;
+      //   DialogShow.value = true;
+      // } catch(error) {
+      //   ElMessage.error("获取气象记录失败，请稍后。");
+      //   DialogShow.value = false;
+      // }
+      WeatherInfo()
+       .then((res) => {
+        if(res.success){
+          Record.value = res.data;
+          DialogShow.value = true;
+        } else {
+          ElMessage.error("获取气象记录失败，请稍后。");
+          DialogShow.value = false;
+        }
+       })
+       .catch((err) => {
+        ElMessage.error(err);
+        DialogShow.value = false;
+       })
+    }
+  },
+  {immediate: true}
+);
 </script>
 
 <template>

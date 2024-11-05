@@ -9,6 +9,8 @@ const indexUrl=  {
     'rightTop':"/bigscreen/alarmNum", //报警次数
     'rightBottom':'/bigscreen/rightBottom',//右下 
     'rightCenter':'/bigscreen/ranking',// 报警排名
+    'CPUStatus':'/bigscreen/CPUStatus', //CPU信息
+    'WeatherInfo':'/bigscreen/WeatherInfo', //气象信息
 }
 
 export default indexUrl
@@ -51,4 +53,14 @@ export const ranking=(param:any={})=>{
 /**右下--设备状态 */
 export const rightBottom=(param:any={})=>{
     return GET(indexUrl.rightBottom,param)
+}
+
+/**请求服务器状态 */
+export const CPUStatus=(param:any={})=>{
+    return GET(indexUrl.CPUStatus,param)
+}
+
+/**请求气象信息 */
+export const WeatherInfo=(param:any={})=>{
+    return GET(indexUrl.WeatherInfo,param)
 }

@@ -7,6 +7,8 @@
 <script setup lang="ts">
 import { onMounted, nextTick } from 'vue';
 import * as echarts from 'echarts';
+import { CPUStatus } from '@/api';
+import { ElMessage } from 'element-plus';
 
 const createChart = () => {
     const myChart = echarts.init(document.getElementById('CPUStatus'));
@@ -76,7 +78,23 @@ const createChart = () => {
     myChart.setOption(option);
 
     setInterval(() => {
-        chartData.push(Math.random() * 100);
+        // chartData.push(Math.random() * 100);
+        CPUStatus()
+         .then((res) => {
+					if(res.success){
+						// console.log("CPU使用率:",res.data.CPUUsage);
+						let usage = res.data.CPUUsage;
+						chartData.push(usage);
+					} else {
+						ElMessage({
+							message: res.msg,
+							type: "warning",
+						})
+					}
+				 })
+				 .catch((err) => {
+					ElMessage.error(err);
+				 })
         if (chartData.length >= 60) {
         chartData.shift();
         }
