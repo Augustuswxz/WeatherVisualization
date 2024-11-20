@@ -23,7 +23,7 @@ function RandomNumBoth(Min: any, Max: any) {
     var num = Min + Math.round(Rand * Range); //四舍五入
     return num;
 }
-//左中
+//右中
 export default [
     {
         url: "/bigscreen/countUserNum",
@@ -74,8 +74,8 @@ export default [
                             countyName: "@county()",
                             createTime: "@datetime('yyyy-MM-dd HH:mm:ss')",
                             deviceId: "6c512d754bbcd6d7cd86abce0e0cac58",
-                            "gatewayno|+1": 10000,
-                            "onlineState|1": [0, 1],
+                            "WeatherStationCode|1": [1001099999, 1001499999],
+                            onlineState: 1,
 
                         }
                     ]
@@ -104,7 +104,7 @@ export default [
             return a
         }
     },
-    //右中
+    //左中
     {
         url: "/bigscreen/ranking",
         type: "get",

@@ -23,7 +23,7 @@ const createChart = () => {
         animation: false,
         title: [
             {
-                text: "CPU",
+                text: "CPU使用率",
                 left: "40%",
             },
             {
@@ -44,9 +44,9 @@ const createChart = () => {
             splitLine: {
                 show: true,
                 lineStyle: {
-                color: ['#ccc'],
-                width: 1,
-                type: 'solid',
+                    color: ['#ccc'],
+                    width: 1,
+                    type: 'solid',
                 },
             },
             axisTick: {
@@ -65,10 +65,11 @@ const createChart = () => {
                 type: "line",
                 data: chartData,
                 areaStyle: {
-                color: "#d5e5ff",
+                    color: "#d5e5ff",
                 },
                 lineStyle: {
-                width: 0,
+                    width: 2,
+                    color: "#d5e5ff",
                 },
                 showSymbol: false,
             },

@@ -19,7 +19,7 @@ const initMap = () => {
     map: new GaodeMap({
       mapStyle: 'amap://styles/darkblue',
       center: [107.054293, 35.246265],
-      zoom: 4.056,
+      zoom: 3.556,
       token: "36e7fbf6b069ab4834feb88a40bc562a",
       // token: "4b8d96b56bed29b2df4a7713e3e1421e",
       doubleClickZoom: false,
@@ -35,9 +35,9 @@ const initMap = () => {
       },
     })
     .shape("circle")
-    .size(5)
+    .size(4)
     .active(true)
-    .color("red")
+    .color("#FF0000")
     .style({
       opacity: 0.5,
     });

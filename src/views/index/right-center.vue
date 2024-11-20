@@ -69,7 +69,7 @@ const setOption = () => {
     },
     series: [
       {
-        name: "用户总览",
+        name: "极端天气信息总览",
         type: "pie",
         radius: ["40%", "70%"],
         // avoidLabelOverlap: false,
@@ -117,28 +117,28 @@ const setOption = () => {
         data: [
           {
             value: state.onlineNum,
-            name: "在线",
+            name: "暴雪",
             itemStyle: {
               color: echartsGraphic(["#0BFC7F", "#A3FDE0"]),
             },
           },
           {
             value: state.offlineNum,
-            name: "离线",
+            name: "暴雨",
             itemStyle: {
               color: echartsGraphic(["#A0A0A0", "#DBDFDD"]),
             },
           },
           {
             value: state.lockNum,
-            name: "锁定",
+            name: "干旱",
             itemStyle: {
               color: echartsGraphic(["#F48C02", "#FDDB7D"]),
             },
           },
           {
             value: state.alarmNum,
-            name: "异常",
+            name: "大风",
             itemStyle: {
               color: echartsGraphic(["#F4023C", "#FB6CB7"]),
             },

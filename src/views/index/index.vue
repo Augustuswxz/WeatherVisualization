@@ -49,7 +49,7 @@ const updateSelectedDate = (val: string) => {
       </ItemWrap>
       <ItemWrap
         class="contetn_left-bottom contetn_lr-item"
-        title="设备提醒"
+        title="最新记录数据"
         style="padding: 0 10px 16px 10px"
       >
         <LeftBottom />
@@ -72,7 +72,7 @@ const updateSelectedDate = (val: string) => {
       <ItemWrap class="contetn_left-bottom contetn_lr-item" title="报警次数">
         <RightTop />
       </ItemWrap>
-      <ItemWrap class="contetn_left-center contetn_lr-item" title="用户总览">
+      <ItemWrap class="contetn_left-center contetn_lr-item" title="极端天气信息总览">
         <RightCenter />
       </ItemWrap>
 

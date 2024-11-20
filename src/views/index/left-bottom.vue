@@ -78,8 +78,8 @@ onMounted(() => {
             <div class="dibu"></div>
             <div class="flex">
               <div class="info">
-                <span class="labels">设备ID：</span>
-                <span class="text-content zhuyao doudong wangguan"> {{ item.gatewayno }}</span>
+                <span class="labels">气象站代码：</span>
+                <span class="text-content zhuyao doudong wangguan"> {{ item.WeatherStationCode }}</span>
               </div>
               <div class="info">
                 <span class="labels">时间：</span>
@@ -93,7 +93,7 @@ onMounted(() => {
                 typeRed: item.onlineState == 0,
                 typeGreen: item.onlineState == 1,
               }"
-              >{{ item.onlineState == 1 ? "上线" : "下线" }}</span
+              >{{ "记录" }}</span
             >
 
             <div class="info addresswrap">
